@@ -1,0 +1,3 @@
+package com.hosteldekho.entity;
+import jakarta.persistence.*; import lombok.*; import java.time.*;
+@Entity @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder public class BookingRequest { @Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long id; @ManyToOne(optional=false) private Room room; @Column(nullable=false) private String studentName; @Column(nullable=false) private String phone; @Column(nullable=false) private String email; private LocalDate moveInDate; @Enumerated(EnumType.STRING) private Enums.BookingStatus status; private LocalDateTime createdAt; @PrePersist void created(){if(createdAt==null)createdAt=LocalDateTime.now();if(status==null)status=Enums.BookingStatus.PENDING;} }
