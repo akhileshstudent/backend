@@ -23,9 +23,12 @@ public class JwtService {
     }
 
     private SecretKey key() {
+        if (secret == null || secret.length() < 32) {
+            throw new IllegalStateException("JWT secret must contain at least 32 characters");
+        }
         byte[] keyBytes = secret.getBytes(StandardCharsets.UTF_8);
         if (keyBytes.length < 32) {
-            throw new IllegalStateException("JWT secret must contain at least 32 bytes");
+            throw new IllegalStateException("JWT secret must contain at least 32 characters");
         }
         return Keys.hmacShaKeyFor(keyBytes);
     }
