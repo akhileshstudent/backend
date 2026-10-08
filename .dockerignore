@@ -2,3 +2,4 @@ target/
 data/
 .git/
 node_modules/
+.m2
